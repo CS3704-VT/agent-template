@@ -1,0 +1,27 @@
+# Generated submission artifacts
+cs3704-submission-*.zip
+cs3704-submission-*/
+
+# Session transcripts and summaries (auto-exported on submit)
+session-*.json
+session-*.md
+session-summary.md
+
+# Student-generated logs
+teacher-log.jsonl
+learning-log.jsonl
+
+# Student-generated learning goals
+learning-goal.md
+team-goal.md
+semester-goal.md
+
+# opencode runtime (auto-generated dependency files)
+.opencode/node_modules/
+.opencode/package.json
+.opencode/package-lock.json
+.opencode/bun.lock
+.env
+
+# Local draft agents/skills (course-authoring workspace, not student-facing)
+.tmp/

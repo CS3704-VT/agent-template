@@ -1,0 +1,26 @@
+#!/bin/sh
+# Git pre-commit hook: forwards a minimal JSON payload to the Opencode
+# post-tool-use.sh script, which decides whether to suggest a learning
+# exercise after the commit. Silent when the script is absent or when
+# the script itself decides not to suggest anything.
+
+POST_SCRIPT="$(git rev-parse --show-toplevel)/.opencode/scripts/post-tool-use.sh"
+
+# Not installed or not executable -> stay silent.
+if [ ! -x "$POST_SCRIPT" ]; then
+  exit 0
+fi
+
+# Build a minimal payload. The script's per-session offer cap (2) acts
+# as a per-day cap here, keyed on the date.
+PAYLOAD="{\"command\":\"git commit\",\"session_id\":\"git-$(date +%Y-%m-%d)\"}"
+
+# Pipe the payload to the script and capture its suggestion JSON.
+OUTPUT=$(printf '%s' "$PAYLOAD" | "$POST_SCRIPT" 2>/dev/null)
+
+# If the script emitted a suggestion, surface it as plain text.
+if [ -n "$OUTPUT" ] && printf '%s' "$OUTPUT" | grep -q additionalContext; then
+  printf '%s\n' "$OUTPUT" | sed -n 's/.*"additionalContext":"\([^"]*\)".*/\1/p'
+fi
+
+exit 0
