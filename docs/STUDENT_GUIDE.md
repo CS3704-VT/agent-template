@@ -8,7 +8,7 @@ This repository is your **agentic development environment** for CS3704 (Intermed
 |------|---------|
 | `AGENTS.md` | Shared instructions every agent follows (policy, logging, budgets). Worth reading once. |
 | `PHASE.md` | Which agents are live this phase, and the roadmap of what arrives next. **Check this first.** |
-| `.opencode/agents/*.md` | The course agents. The baseline available agents are Plan (for planning), Build (for coding), and **@dcbrown** (for course administration). The available agents will grow with each phase — see `PHASE.md`. |
+| `.opencode/agents/*.md` | The course agents. The baseline available agents are **Plan** (for planning), **Build** (for coding), **`@dcbrown`** (for course administration), and **`@assignment`** (for assignment requirements and packaging). The available agents will grow with each phase — see `PHASE.md`. |
 | `.opencode/skills/*` | On-demand capabilities: `quiz`, `concept-explain`, `learning-goal`, `learning-opportunities`, `orient`, `submit`. |
 | `.opencode/scripts/` | Helper scripts: `post-tool-use.sh` (learning nudges) and `submit.sh` (submission packaging). |
 | `hooks/`, `setup.sh` | Git-hook infrastructure. `setup.sh` installs the hooks into `.git/hooks/`. |
@@ -25,7 +25,7 @@ agent-template/
 ├── AGENTS.md            # shared policy every agent follows — read once
 ├── PHASE.md             # course-owned; which agents are live this phase
 ├── opencode.json        # ARC provider + models; reads ARC_API_KEY from env
-├── assignment.md        # details for the current assignment, populated by @assignment subagent
+├── assignment.md        # details for the current assignment, populated by the assignment subagent
 ├── .gitignore           # ignores logs, goals, zips, .env, runtime deps, .tmp/
 ├── docs/                # this guide + starter templates
 │   ├── STUDENT_GUIDE.md
@@ -86,7 +86,7 @@ Agents are released in phases over the semester rather than all at once. **`PHAS
 - **`dcbrown`** (subagent) answers course questions, runs quizzes and concept explanations.
 - **`assignment`** (subagent) retrieves assignment details, verifies completion, and packages submission.
 
-Phase-gated agents (requirements, architect, tester, etc.) arrive with their phase branch — invoke them by role once `PHASE.md` lists them as live, e.g. "**@requirements-analyst** review my user stories." Your agent delegates via the Task tool.
+Phase-gated agents (requirements, architect, tester, etc.) arrive with their phase branch — invoke them by role once `PHASE.md` lists them as live (e.g., "<code><strong>@requirements-analyst</strong> review my user stories</code>". Your agent delegates via the Task tool.
 
 ## Workflow: a typical session
 
@@ -94,17 +94,17 @@ Phase-gated agents (requirements, architect, tester, etc.) arrive with their pha
 
 1. **One-time setup** — Set `ARC_API_KEY`, run `baker check`, `baker bake`, and `baker run` commands (see [Getting started](#getting-started)).
 2. **Set a learning goal** — run `\skills` and select `learning-goal` (writes `learning-goal.md`); see [Learning features](#learning-features).
-3. **Pick the right agent with `<tab>`** — `plan` for brainstorming (read-only), `build` for code/tests/edits, `@dcbrown` for course questions and quizzes, and `@assignment` for assignment details and submission. Check [PHASE.md](../PHASE.md) for phase-gated agents; see [Using the agents](#using-the-agents).
+3. **Pick the right agent with `<tab>`** — `plan` for brainstorming (read-only), `build` for code/tests/edits, **`@dcbrown`** for course questions and quizzes, and **`@assignment`** for assignment details and submission. Check [PHASE.md](../PHASE.md) for phase-gated agents; see [Using the agents](#using-the-agents).
 4. **Plan → Build handoff** — ideate with `plan`; when the plan is solid, have `build` implement it (Plan delegates writes to Build).
-5. **Learn as you go** — after significant work, accept a `learning-opportunities` exercise; run `/concept-explain <term>` to get details on a concept, or `@dcbrown quiz me on <topic>` for a concept check; see [Learning features](#learning-features).
+5. **Learn as you go** — after significant work, accept a `learning-opportunities` exercise; run `/concept-explain <term>` to get details on a concept, or <code><strong>@dcbrown</strong> quiz me on <topic></code> for a concept check; see [Learning features](#learning-features).
 6. **Commit** — `git commit` triggers the `pre-commit` hook, which may surface a learning nudge (see [Template architecture](#template-architecture-where-things-live)).
-7. **Submit** — `@assignment submit` packages the submission; **You must complete the final steps (i.e., upload to Canvas) to complete submissions!!!**; see [Submitting work](#submitting-work).
+7. **Submit** — <code><strong>@assignment</strong> submit</code> packages the submission; **You must complete the final steps (i.e., upload to Canvas) to complete submissions!!!**; see [Submitting work](#submitting-work).
 
 ### Common tasks cookbook
 
-- **Day-to-day coding loop** — `<tab>` to `plan` → ideate → delegate to `build` → review the diff → `git commit`. See [Using the agents](#using-the-agents).
-- **Submit work** — `@assignment submit` → upload the generated zip to Canvas. See [Submitting work](#submitting-work).
-- **Get unstuck** — `/concept-explain <term>` for a definition + check; `@dcbrown quiz me on <topic>` for a concept check; `/orient` to map an unfamiliar repo. See [Repo comprehension](#repo-comprehension) and [Learning features](#learning-features).
+- **Day-to-day coding loop** — `<tab>` to **`Plan`** → ideate → delegate to **`Build`** → review the diff → `git commit`. See [Using the agents](#using-the-agents).
+- **Submit work** — <code><strong>@assignment</strong> submit</code> → upload the generated zip to Canvas. See [Submitting work](#submitting-work).
+- **Get unstuck** — `/skills`  → `concept-explain <term>` for a definition + check; <code><strong>@dcbrown</strong> quiz me on <topic></code> for a concept check; `/orient` to map an unfamiliar repo. See [Repo comprehension](#repo-comprehension) and [Learning features](#learning-features).
 - **Set or update a learning goal** — `\skills` → `learning-goal` (per-assignment `learning-goal.md`, team `team-goal.md`; the semester goal is delegated to Build). See [Learning features](#learning-features).
 
 ## Learning features
@@ -166,10 +166,10 @@ As you work, several files appear at the repo root. All are gitignored — you d
 
 ## Submitting work
 
-Use the `submit` skill (with a prompt like `**@assignment** submit my work` or running the appropriate submission script in `.opencode/scripts/submit_*.sh` directly). It writes a session summary and packages your work for submission to Canvas or GitHub.
+Use the `submit` skill (with a prompt like "<code><strong>@assignment</strong> submit my work</code>" or running the appropriate submission script in `.opencode/scripts/submit_*.sh` directly). It writes a session summary and packages your work for submission to Canvas or GitHub.
 
 ### AI‑usage declaration (mandatory)
-When you run `@assignment submit` (or the wrapper `./submit`) the system will ask you **five mandatory questions** about any AI assistance you used for the assignment:
+When you run <code><strong>@assignment</strong> submit</code>, the system will ask you **five mandatory questions** about any AI assistance you used for the assignment:
 
 1. **Which AI tools (other than Opencode) did you use?**
 2. **What model names were used?**
@@ -184,4 +184,4 @@ Your answers are automatically written to a file named **`ai_disclosure.md`** at
 - **Schedule, topics, deadlines:** the canonical course repo `https://github.com/CS3704-VT/Course` ([`README.md`](https://github.com/CS3704-VT/Course/blob/main/README.md)).
 - **Policies, grading, learning outcomes:** [`SYLLABUS.md`](https://github.com/CS3704-VT/Course/blob/main/SYLLABUS.md) in that repo.
 - **AI policy:** [`AI_POLICY.md`](https://github.com/CS3704-VT/Course/blob/main/AI_POLICY.md) in that repo. Use the course AI configuration; disclose meaningful AI use; you are responsible for everything you submit.
-- **Questions:** for course-related questions ask the `@dcbrown` agent, for assignment-related questions ask the `@assignment` agent, or email Dr. Brown at dcbrown@vt.edu for questions related to these or anything else (e.g., grades, deadlines, or academic integrity).
+- **Questions:** for course-related questions ask the **`@dcbrown`** agent, for assignment-related questions ask the **`@assignment`** agent, or email Dr. Brown at dcbrown@vt.edu for questions related to these or anything else (e.g., grades, deadlines, or academic integrity).
