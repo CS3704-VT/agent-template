@@ -6,10 +6,14 @@ This repository configures [Opencode](https://opencode.ai/) with course-specific
 
 ### First time:
 ```sh
-baker check CS3704-VT/profiles:agent-template.yml       # ensures you have necessary dependencies; opencode will be installed in next step if you do not have it
-baker bake CS3704-VT/agent-template                     # installs dependencies and configurations for this repo; defaults to your local machine
+git clone https://github.com/CS3704-VT/agent-template   # clone this repository
+cd agent template                                       # navigate into the project directory
+baker check CS3704-VT/profiles:agent-template.yml       # ensures you have necessary dependencies; some failing checks may be installed in the next step
+baker bake .                                            # installs dependencies and configurations for this repo; defaults to your local machine
 baker run setup                                         # runs setup scripts and takes you through learning goals activity for the given assignment
 ```
+
+For subsequent usage, just navigate into the top-level of the project repository and run `opencode` to access the agents and skills for your assignment.
 
 ### Basic Workflow:
 

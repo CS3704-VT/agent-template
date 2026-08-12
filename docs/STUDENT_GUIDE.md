@@ -28,7 +28,8 @@ agent-template/
 ├── assignment.md        # details for the current assignment, populated by the assignment subagent
 ├── .gitignore           # ignores logs, goals, zips, .env, runtime deps, .tmp/
 ├── docs/                # this guide + starter templates
-│   ├── STUDENT_GUIDE.md
+│   ├── README.md
+├── ├── STUDENT_GUIDE.md
 │   └── templates/
 ├── hooks/               # git-hook sources
 │   ├── pre-commit       # on commit, calls .opencode/scripts/post-tool-use.sh
@@ -55,11 +56,13 @@ agent-template/
   - To obtain an API Key for the Virignia Tech Advanced Research Computing, follow the instructions [here](https://www.docs.arc.vt.edu/ai/011_llm_api_arc_vt_edu.html#llm-api-arc-vt-edu)
 2. **Check you have the appropriate dependencies**:
    ```sh
-   baker check CS3704-VT/profiles:agent-template.yml
+   baker check CS3704-VT/profile:agent-template.yml
    ```
-3. **Configure your environment and run the bootstrap script:**
+3. **Clone the repository, configure your environment, and run the bootstrap script:**
    ```sh
-   baker bake CS3704-VT/agent-template
+   git clone https://github.com/CS3704-VT/agent-template
+   cd agent-template
+   baker bake .
    baker run setup
    ```
    - The first time you run it, the script sets a git hook that surfaces the `learning-opportunities` skill automatically as you work (see [Learning features](#learning-features) below) and creates a **semester‑goal** file under `~/.config/opencode/cs3704-goals/semester-goal.md` to outline your learning goals for CS3704 this semester. 
