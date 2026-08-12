@@ -11,8 +11,8 @@ license: CC-BY-4.0
 2. **Load the resource** – Read the markdown file `resources/<concept>.md` (case‑sensitive) which contains a concise 2‑3 sentence description.
 3. **Display** – Show the description to the student (plain text, no formatting needed beyond what is in the resource file).
 4. **Interactive check** – Ask **2‑3** follow‑up questions using the `question` tool. The questions should probe understanding of the definition (e.g., "When would you choose Agile over Waterfall?", "What phase of the SDLC follows implementation?").
-5. **Logging** – Each question is logged to `teacher-log.jsonl` with a distinct `quiz_id` for the whole concept‑explain session and a `log` value of `concept-explain`. Include the `concept` field so analytics can filter by concept.
-6. **Budget** – Because the interaction uses the quiz‑type budget, it counts against the automatic‑quiz limit (2 per session). Agents should check the budget before invoking (the existing budget logic inspects `teacher‑log.jsonl`).
+5. **Logging** – Each question is logged to a dedicated file `concept-explain-log.jsonl` (located at the repository root). The entry includes a unique `quiz_id` for the whole concept‑explain session, a `log` value of `concept-explain`, the `concept` field, the question text, and the student's answer. A single summary entry is also written to `teacher‑log.jsonl` with `trigger: "manual"` (so it does **not** count toward the automatic‑quiz budget).
+6. **Budget** – The concept‑explain interaction writes a manual entry to `teacher‑log.jsonl` (trigger: "manual"), so it does **not** consume the automatic‑quiz budget. Agents may still check the budget if they wish, but the manual entry is ignored by the budget‑checking logic.
 
 ## Example workflow (pseudocode for the agent)
 ```
