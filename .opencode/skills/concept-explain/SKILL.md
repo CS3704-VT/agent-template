@@ -7,7 +7,7 @@ license: CC-BY-4.0
 # Concept‑Explain Skill
 
 ## How it works (for agents that load this skill)
-1. **Input** – The invoking agent must supply a `concept` name (e.g., "Agile", "Waterfall", "SDLC‑Requirements").
+1. **Input** – The invoking agent must supply a `concept` name that appears in the CS‑3704 curriculum. Valid concepts are those listed in `.opencode/topics/allowed-concepts.txt`, concepts extracted automatically from the official Course schedule (`Course/README.md`), **or** the first markdown heading of any slide file located in the external repository `Course/resources/slides/`. Additionally, any slide‑summary markdown files placed locally in `.opencode/topics/` (one heading per file) are also considered valid.
 2. **Load the resource** – Read the markdown file `resources/<concept>.md` (case‑sensitive) which contains a concise 2‑3 sentence description.
 3. **Display** – Show the description to the student (plain text, no formatting needed beyond what is in the resource file).
 4. **Interactive check** – Ask **2‑3** follow‑up questions using the `question` tool. The questions should probe understanding of the definition (e.g., "When would you choose Agile over Waterfall?", "What phase of the SDLC follows implementation?").
