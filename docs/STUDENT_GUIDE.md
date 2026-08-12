@@ -114,9 +114,9 @@ The template includes learning-focused skills designed to help you build genuine
 - **learning-opportunities** — after significant work (new files, refactors, design decisions), you may be offered a short 10–15 minute exercise on the code you just wrote. The git hook can also surface these automatically. These are optional to complete
 - **quiz** — occasional concept checks on course material will be provided as pop quiz during agent sessions. These are limited to one auto-triggered quiz per session, which is mandatory for completion but not graded on correctness. You can also trigger as many quizzes as you would like to further study course content.
 - **learning-goal** — set a concrete learning goal and work toward it. This will be done at the semester level, individual assignment level, and when applicable, for team or partner-based assignments.
-- **concept-explain** — get a brief definition of a software engineering concept discussed in class (e.g., "Agile", "Use cases", etc.) with a short knowledge-check.
+- **concept-explain** — get a brief definition of a software‑engineering concept discussed in class (e.g., "Agile", "Use cases", etc.) with a short knowledge‑check. Answers and questions are recorded in a dedicated `concept-explain-log.jsonl` file and do **not** count toward the automatic quiz budget.
 
-Your learning activity is logged to `learning-log.jsonl` and `teacher-log.jsonl` at the repo root (both gitignored). These will be used to drive the quiz budget, help you track your own progress and learning, and be used by the teaching staff for grading purposes. See `AGENTS.md` for the full policy.
+Your learning activity (including quizzes, learning‑goals, and concept‑explain interactions) is logged to `learning-log.jsonl` and `teacher‑log.jsonl` at the repo root (both gitignored). Concept‑explain specific entries are written to `concept‑explain‑log.jsonl` and are **not** counted by the quiz‑budget logic. These logs drive the quiz budget, help you track progress, and are used by teaching staff for grading. See `AGENTS.md` for the full policy.
 
 ## Repo comprehension
 
