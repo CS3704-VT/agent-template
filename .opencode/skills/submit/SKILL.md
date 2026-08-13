@@ -33,13 +33,13 @@ Prepares a Canvas-ready submission package for CS3704 coursework.
 {
   "questions": [
     {
-      "question": "Which AI tools (other than Opencode) did you use?",
+      "question": "Which AI tools did you use?",
       "header": "AI Tool(s)",
       "options": [{"label": "Enter answer", "description": ""}],
       "multiple": false
     },
     {
-      "question": "What model names were used?",
+      "question": "What models were used?",
       "header": "Model name(s)",
       "options": [{"label": "Enter answer", "description": ""}],
       "multiple": false

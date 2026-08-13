@@ -25,12 +25,13 @@ agent-template/
 ├── AGENTS.md            # shared policy every agent follows — read once
 ├── PHASE.md             # course-owned; which agents are live this phase
 ├── opencode.json        # ARC provider + models; reads ARC_API_KEY from env
-├── assignment.md        # details for the current assignment, populated by the assignment subagent
+├── HW1.md / PM1.1.md     # per-assignment details, one file per assignment, created by @assignment analyze
 ├── .gitignore           # ignores logs, goals, zips, .env, runtime deps, .tmp/
 ├── docs/                # this guide + starter templates
 │   ├── README.md
-├── ├── STUDENT_GUIDE.md
+│   ├── STUDENT_GUIDE.md
 │   └── templates/
+│       └── assignment.md   # seed for @assignment analyze (copied to <name>.md at repo root)
 ├── hooks/               # git-hook sources
 │   ├── pre-commit       # on commit, calls .opencode/scripts/post-tool-use.sh
 │   └── setup-git-hooks.sh  # copies hooks into .git/hooks/
@@ -44,7 +45,7 @@ agent-template/
 ### Template Editing
 
 - **Course-owned (extend, don't edit):** Please do not edit `AGENTS.md`, `PHASE.md`, `.opencode/agents/*`, `.opencode/skills/*`, `.opencode/scripts/*`, `docs/STUDENT_GUIDE.md`, `opencode.json`, or other files critical for configuring and using this template. Please also do not modify the auto-generated files, such as logs, goal files, and submission zips — see [Auto-generated files](#auto-generated-files).
-- **Yours to edit:** You may edit your project code and documentation and `assignment.md` to include/modify assignment requirements.
+- **Yours to edit:** You may edit your project code and documentation and the per-assignment analysis files (e.g. `HW1.md`, `PM1.1.md`) to include/modify assignment requirements.
 - **If you find an issue with this template, please contact Dr. Brown or submit a pull request!** 
 
 ## Getting started
@@ -100,7 +101,7 @@ Phase-gated agents (requirements, architect, tester, etc.) arrive with their pha
 
 1. **One-time setup** — Set `ARC_API_KEY`, run `baker check`, `baker bake`, and `baker run` commands (see [Getting started](#getting-started)).
 2. **Set a learning goal** — run `\skills` and select `learning-goal` (writes `learning-goal.md`); see [Learning features](#learning-features).
-3. **Extract the assignment requirements** — run <code><strong>@assignment</strong> analyze</code> to automatically gather the details and requirements of a particular assignment. _This will need to be manually reviewed by you!_
+3. **Extract the assignment requirements** — run <code><strong>@assignment</strong> analyze PM1.2</code> (or pass a link: <code><strong>@assignment</strong> analyze https://…</code>) to automatically gather the details and requirements of a particular assignment. This writes a per-assignment `<name>.md` file at the repo root (e.g. `PM1.2.md` or `HW3.md`). _This will need to be manually reviewed by you!_ A bare `PMx` resolves to the project README (overview, not an assignment); an unknown name or missing file produces a graceful "no assignment found" error.
 4. **Pick the right agent with `<tab>`** — `plan` for brainstorming (read-only), `build` for code/tests/edits, **`@dcbrown`** for course questions and quizzes, and **`@assignment`** for assignment details and submission. Check [PHASE.md](../PHASE.md) for phase-gated agents; see [Using the agents](#using-the-agents).
 5. **Plan → Build handoff** — ideate with `plan`; when the plan is solid, have `build` implement it (Plan delegates writes to Build).
 6. **Learn as you go** — after significant work, accept a `learning-opportunities` exercise; run `/concept-explain <term>` to get details on a concept, or <code><strong>@dcbrown</strong> quiz me on <topic></code> for a concept check; see [Learning features](#learning-features).
