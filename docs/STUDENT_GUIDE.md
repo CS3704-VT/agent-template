@@ -100,11 +100,12 @@ Phase-gated agents (requirements, architect, tester, etc.) arrive with their pha
 
 1. **One-time setup** — Set `ARC_API_KEY`, run `baker check`, `baker bake`, and `baker run` commands (see [Getting started](#getting-started)).
 2. **Set a learning goal** — run `\skills` and select `learning-goal` (writes `learning-goal.md`); see [Learning features](#learning-features).
-3. **Pick the right agent with `<tab>`** — `plan` for brainstorming (read-only), `build` for code/tests/edits, **`@dcbrown`** for course questions and quizzes, and **`@assignment`** for assignment details and submission. Check [PHASE.md](../PHASE.md) for phase-gated agents; see [Using the agents](#using-the-agents).
-4. **Plan → Build handoff** — ideate with `plan`; when the plan is solid, have `build` implement it (Plan delegates writes to Build).
-5. **Learn as you go** — after significant work, accept a `learning-opportunities` exercise; run `/concept-explain <term>` to get details on a concept, or <code><strong>@dcbrown</strong> quiz me on <topic></code> for a concept check; see [Learning features](#learning-features).
-6. **Commit** — `git commit` triggers the `pre-commit` hook, which may surface a learning nudge (see [Template architecture](#template-architecture-where-things-live)).
-7. **Submit** — <code><strong>@assignment</strong> submit</code> packages the submission; **You must complete the final steps (i.e., upload to Canvas) to complete submissions!!!**; see [Submitting work](#submitting-work).
+3. **Extract the assignment requirements** — run <code><strong>@assignment</strong> analyze</code> to automatically gather the details and requirements of a particular assignment. _This will need to be manually reviewed by you!_
+4. **Pick the right agent with `<tab>`** — `plan` for brainstorming (read-only), `build` for code/tests/edits, **`@dcbrown`** for course questions and quizzes, and **`@assignment`** for assignment details and submission. Check [PHASE.md](../PHASE.md) for phase-gated agents; see [Using the agents](#using-the-agents).
+5. **Plan → Build handoff** — ideate with `plan`; when the plan is solid, have `build` implement it (Plan delegates writes to Build).
+6. **Learn as you go** — after significant work, accept a `learning-opportunities` exercise; run `/concept-explain <term>` to get details on a concept, or <code><strong>@dcbrown</strong> quiz me on <topic></code> for a concept check; see [Learning features](#learning-features).
+7. **Commit** — `git commit` triggers the `pre-commit` hook, which may surface a learning nudge (see [Template architecture](#template-architecture-where-things-live)).
+8. **Submit** — <code><strong>@assignment</strong> submit</code> packages the submission; **You must complete the final steps (i.e., upload to Canvas) to complete submissions!!!**; see [Submitting work](#submitting-work).
 
 ### Common tasks cookbook
 
@@ -164,7 +165,7 @@ As you work, several files appear at the repo root. All are gitignored — you d
 
 ## Submitting work
 
-Use the `submit` skill (with a prompt like "<code><strong>@assignment</strong> submit my work</code>" or running the appropriate submission script in `.opencode/scripts/submit_*.sh` directly). It writes a session summary and packages your work for submission to Canvas or GitHub.
+Use the `submit` skill (with a prompt like "<code><strong>@assignment</strong> submit my work</code>" or running the appropriate submission script in `.opencode/scripts/submit_*.sh` directly). It writes a session summary and packages your work for submission to Canvas or GitHub. The **`@assignment`** subagent can automatically verify your work meets the submission criteria with the following command: <code><strong>@assignment</strong> validate</code>
 
 ### AI‑usage declaration (mandatory)
 When you run <code><strong>@assignment</strong> submit</code>, the system will ask you **five mandatory questions** about any AI assistance you used for the assignment:

@@ -27,13 +27,14 @@ For subsequent usage, just navigate into the top-level of the project repository
     * More agents will be introduced as the semester goes on (see [PHASES.md](./PHASES.md)).
 * Use `**@**` to invoke any subagents.
     * `**@dcbrown**` to answer questions about the course, explain course content, and generate quizzes.
-    * `**@assignment**` to analyze assignment requirements, verify your work, and package your submission.
+    * `**@assignment**` to analyze assignment requirements (<code><strong>@assignment</strong> analyze</code>), verify your work (<code><strong>@assignment</strong> validate</code>), and package your submission (<code><strong>@assignment</strong> submit</code>).
     * More subagents will be introduced as the semester goes on (see [PHASES.md](./PHASES.md)).
 * To use skills, type `/skills` and select the approporiate skill.
     * To modify your course, assignment, or team learning goals, use `learning-goals` (should be invoked automatically when beginning an assignment).
     * If you would like to generate a quiz or ask a question about a concept, use the `quiz` or `concept-explain` skills. Any sub-agent can also invoke these skills (e.g., `**@dcbrown** quiz me` or `**@dcbrown** explain Agile`)
     * For more in-depth learning opportunities, use `learning-opportunities` (should be invoked automatically during development work).
-* To submit, use prompts similar to `**@assignment** submit` or `**@assignment** submit my work`. This will package your work into the appropriate format (i.e., zip file, GitHub repo, etc.). **You must upload the generated package to Canvas to complete the submission**!
+* To submit, use  prompts like "<code><strong>@assignment</strong> submit</code>" or "<code><strong>@assignment</strong> submit my work</code>" to package your work into the appropriate format (i.e., zip file, GitHub repo, etc.). **You are responsible for checking the generated requirements (`assignment.md`) meet the assignment expectations and uploading the generated package to Canvas to complete the submission!**
+
 **Full setup and usage guide:** [`docs/STUDENT_GUIDE.md`](docs/STUDENT_GUIDE.md).
 
 > **For your submission, replace this README with a README specific to your assignment.** The template guide will stay at `docs/STUDENT_GUIDE.md` and this README is copied in `docs/README.md`.
