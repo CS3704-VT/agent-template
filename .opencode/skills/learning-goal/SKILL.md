@@ -30,11 +30,11 @@ Keep offers brief and non-repetitive. One short sentence is enough.
 
 ### 1. Semester goal (once, start of semester)
 - Store at: ~/.config/opencode/cs3704-goals/semester-goal.md
-- Run the full MCII exercise. Ask the student what they want to learn this semester. 
+- Run the full MCII exercise. Ask the student why they are taking this course, what they want to learn this semester, and broader goals for the class this semester. 
 
 ### 2. Per-Assignment goal (each assignment)
 - Store at: ./learning-goal.md (project root)
-- Run a shorter version — focus on what they want to get out of this specific assignment (use assignment instructions for context). Ask if they also want to build on their semester goal or set something new. 
+- Run a shorter version — focus on what they want to get out of this specific assignment (use assignment instructions for context in `assignment.md`). Ask if they also want to build on their semester goal or set something new. 
 
 ### 3. Team project goal (per project)
 - Store at: ./team-goal.md (project root)

@@ -9,8 +9,9 @@ This repository and the coursework artifacts it contains were developed for the 
 **Dr. Michael Mullarkey.** The [*_orient_*](https://github.com/mcmullarkey/orient) skill was adapted by Dr. Cat Hicks from [Dr. Michael Mullarky](https://mcmullarkey.github.io/).
 
 **Dr. Steven Atkinson.** The [TBD] agents are based on the Constellize method by Dr. Steven Atkinson ("Dr. A"). 
-* [[website](https://www.constellize.com/)] -- [[book](https://www.constellize.com/book)] -- [[GitHub](https://github.com/constellize/constellize-plugins-official/)]
-.
+* [[website](https://www.constellize.com/)] -- [[book](https://www.constellize.com/book)] -- [[GitHub](https://github.com/constellize/constellize-plugins-official/)].
+
+**Dr. Amy Allen and Dr. David Hicks.** The course-level learning goal questions are based on their talk "[_Assessment Isn't Sexy, But It Matters: Rethinking Assignments in the Age of AI_](https://docs.google.com/presentation/d/1WM3bOGuzeEGnvFSwUR522LnqvWFALtrQgZI-W8i8ZPk/edit?usp=drive_link)" presented at the 2026 Virginia Tech AI Teaching Symposium.
 
 ## Tools and Infrastructure
 
