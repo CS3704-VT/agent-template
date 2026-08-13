@@ -41,19 +41,22 @@ agent-template/
     └── topics/          # reserved, currently empty
 ```
 
-### Read-only vs. student-editable
+### Template Editing
 
-- **Course-owned (extend, don't edit):** `AGENTS.md`, `PHASE.md`, `.opencode/agents/*`, `.opencode/skills/*`, `.opencode/scripts/*`. If an assignment asks you to extend a course agent, create a new file rather than editing the course one — this keeps future phase merges clean. See [Extending the template](#extending-the-template).
-- **Yours to edit:** `docs/STUDENT_GUIDE.md`, your project code, `assignment.md` to include/modify assignment requirements, and any agents/skills you add under `.opencode/`.
-- **Auto-generated (gitignored, don't manage):** logs, goal files, and submission zips — see [Auto-generated files](#auto-generated-files).
+- **Course-owned (extend, don't edit):** Please do not edit `AGENTS.md`, `PHASE.md`, `.opencode/agents/*`, `.opencode/skills/*`, `.opencode/scripts/*`, `docs/STUDENT_GUIDE.md`, `opencode.json`, or other files critical for configuring and using this template. Please also do not modify the auto-generated files, such as logs, goal files, and submission zips — see [Auto-generated files](#auto-generated-files).
+- **Yours to edit:** You may edit your project code and documentation and `assignment.md` to include/modify assignment requirements.
+- **If you find an issue with this template, please contact Dr. Brown or submit a pull request!** 
 
 ## Getting started
 
-1. **Set your API key.** `opencode.json` uses the **ARC** provider and reads the key from the `ARC_API_KEY` environment variable — the key never lives in the config file. Set it in your shell, or create a `.env` file at the repo root (gitignored):
+1. **Set your API key.** `opencode.json` uses the **ARC** provider and reads the key from the `ARC_API_KEY` environment variable. You should be able to set it in your shell using the following commands:
    ```sh
-   echo 'ARC_API_KEY=...' > .env
+   export ARC_API_KEY=sk-... # MacOS and Linux
+   setx ARC_API_KEY=sk-...   # Windows
    ```
-  - To obtain an API Key for the Virignia Tech Advanced Research Computing, follow the instructions [here](https://www.docs.arc.vt.edu/ai/011_llm_api_arc_vt_edu.html#llm-api-arc-vt-edu)
+  - To obtain an API Key for the Virignia Tech Advanced Research Computing, go to [https://llm.arc.vt.edu](https://llm.arc.vt.edu) then select go to your user profile and select _Settings_ -> _Account_ -> _API keys_. More details on obtaining your API key are available [here](https://www.docs.arc.vt.edu/ai/011_llm_api_arc_vt_edu.html#llm-api-arc-vt-edu).
+  - Additional details on setting an environment variable for your system are available [here](https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/How-to-set-an-environment-variable.html). Please follow the instructions for setting a persistent/permanent variable to avoid resetting your ARC_API_KEY variable every time.
+
 2. **Check you have the appropriate dependencies**:
    ```sh
    baker check CS3704-VT/profile:agent-template.yml
@@ -138,22 +141,14 @@ three models:
 
 | Model | ID |
 |-------|----|
+| DeepSeek-V4-Flash | `ARC/DeepSeek-V4-Flash` |
 | GPT-OSS 120B (default) | `ARC/gpt-oss-120b` |
 | GLM-5.2 | `ARC/GLM-5.2` |
-| Kimi K2.6 | `ARC/Kimi-K2.6` |
+| Kimi-K3 | `ARC/Kimi-K3` |
 
 You must have an API key set as an environment variable to `ARC_API_KEY`.
 
 Switch models in the opencode interface using `/models` and navigating to the desired AI model or with `--model`. All three share a 128K-token context window.
-
-## Extending the template
-
-You will grow this environment over the semester:
-
-- **New agents:** add `.opencode/agents/<name>.md`. Follow the **Agent contract** in `AGENTS.md` — every agent file must declare frontmatter (`description`,
-  `mode`, `permission`), open with a pointer to `AGENTS.md`, and stay in role.
-- **New skills:** add `.opencode/skills/<name>/SKILL.md`.
-- **Course-provided files are read-only.** If an assignment asks you to extend an existing agent, create a new file rather than editing the course one, so future phase merges stay clean.
 
 ## Auto-generated files
 

@@ -10,11 +10,11 @@
       },
       "models": {
         "gpt-oss-120b": { "name": "gpt-oss-120b", "limit": { "context": 131072, "output": 16384 } },
+        "DeepSeek-V4-Flash": { "name": "DeepSeek-V4-Flash", "limit": { "context": 524288, "output": 16384 } },
         "GLM-5.2": { "name": "GLM-5.2", "limit": { "context": 131072, "output": 16384 } },
-        "Kimi-K2.6": { "name": "Kimi K2.6", "limit": { "context": 131072, "output": 16384 } }
+        "Kimi-K3": { "name": "Kimi-K3", "limit": { "context": 131072, "output": 16384 } }
       }
     }
   },
   "model": "ARC/gpt-oss-120b"
 }
-

@@ -7,11 +7,12 @@ session-*.json
 session-*.md
 session-summary.md
 
-# Student-generated logs
+# Student-generated logs (these are .gitignored, but will be included with assignment submissions)
+concept-explain.json
 teacher-log.jsonl
 learning-log.jsonl
 
-# Student-generated learning goals
+# Student-generated learning goals (these are .gitignored, but will be included with assignment submissions)
 learning-goal.md
 team-goal.md
 semester-goal.md
@@ -25,3 +26,6 @@ semester-goal.md
 
 # Local draft agents/skills (course-authoring workspace, not student-facing)
 .tmp/
+
+# Baker
+.baker*
