@@ -7,7 +7,7 @@ This repository configures [Opencode](https://opencode.ai/) with course-specific
 To use this template, you will need [git](https://git-scm.com/install/), [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm?ref=meilisearch-blog), and an ARC_API_KEY [environment variable](https://chlee.co/how-to-setup-environment-variables-for-windows-mac-and-linux/) set to your [API key from Virginia Tech's Advanced Research Computing](https://www.docs.arc.vt.edu/ai/011_llm_api_arc_vt_edu.html#llm-api-arc-vt-edu).
 
 
-### First Time:
+### Setup:
 
 ```sh
 git clone https://github.com/CS3704-VT/agent-template   # clone this repository
@@ -17,7 +17,17 @@ baker bake .                                            # installs dependencies 
 baker run setup                                         # runs setup scripts for starting the agent-template
 ```
 
-For subsequent usage, just navigate into the top-level of the project repository and run `opencode` to access the agents and skills for your assignment.
+### First Time:
+
+After the initial installation and setup, run the following in the root directory of the repository _for each assignment_:
+
+```sh
+opencode
+@assignment analyze <assignment name or link to assignment> # Integrates assignmnt details into repository context
+/skills -> /learning-goal                                   # Sets the learning goals for the given assignment scope (course, assignment, or team)
+```
+
+For subsequent usage, just navigate into the top-level directory of the project repository and run `opencode` to access the agents and skills for your assignment.
 
 ### Basic Workflow:
 
