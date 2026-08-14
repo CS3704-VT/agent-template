@@ -77,7 +77,7 @@ agent-template/
    cd agent-template
    opencode
    ```
-   The default model is `ARC/gpt-oss-120b`. See [Models](#models) for details on available models and how to switch.
+   The default model is `ARC/DeepSeek-V4-Flash`. See [Models](#models) for details on available models and how to switch.
 
 ## Phases & agents
 
