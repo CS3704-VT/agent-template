@@ -1,0 +1,48 @@
+
+# CS3704 — agent-template
+#
+# Students run this from INSIDE their clone:
+#
+#   git clone https://github.com/CS3704-VT/agent-template
+#   cd agent-template
+#   baker bake .
+#   baker run setup
+#
+# `local: {}` is the current directory, so the cd is not optional.
+
+name: cs3704-agent-template
+
+local: {}
+
+tools:
+  - opunit
+  - opencode:
+      install: npm
+
+
+config:
+  - files:
+      # Installs the pre-commit hook directly. hooks/setup-git-hooks.sh
+      # iterates the repo root rather than hooks/, so it copies README.md and
+      # friends into .git/hooks and never installs pre-commit.
+      - src: ./hooks/pre-commit
+        dest: .git/hooks/pre-commit
+        mode: "0755"
+
+commands:
+  # Orientation, not work. Everything this repo needs is done by `baker bake`;
+  # analyze and the goal exercise are interactive and belong to the student, so
+  # setup points at them rather than driving them.
+  setup: >-
+    echo "" &&
+    echo "🍞 Your CS3704 environment is baked and ready." &&
+    echo "" &&
+    echo "🧑‍🍳 Next, in order:" &&
+    echo "   1. opencode                      start the agent workspace" &&
+    echo "   2. @assignment analyze HW1       pull in the assignment details" &&
+    echo "   3. /learning-goal                set your goals for it (10-15 min)" &&
+    echo "" &&
+    echo "🥖 Switch agents with <tab>; call subagents with @name." &&
+    echo "⏲️  Something looks off? Contact dcbrown" &&
+    echo ""
+
