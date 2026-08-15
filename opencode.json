@@ -16,5 +16,5 @@
       }
     }
   },
-  "model": "ARC/gpt-oss-120b"
+  "model": "ARC/DeepSeek-V4-Flash"
 }
