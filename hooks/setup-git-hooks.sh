@@ -15,12 +15,13 @@ HOOK_DIR="$REPO_ROOT/.git/hooks"
 mkdir -p "$HOOK_DIR"
 
 # Install each hook present in the local hooks directory
-for hook in $(ls $(dirname "$0")/.. 2>/dev/null); do
+HOOKS_DIR=$(cd "$(dirname "$0")" && pwd)
+for hook in $(ls "$HOOKS_DIR" 2>/dev/null); do
   # Skip the installer script itself
   if [ "$hook" = "setup-git-hooks.sh" ]; then
     continue
   fi
-  src="$(dirname "$0")/../$hook"
+  src="$HOOKS_DIR/$hook"
   dest="$HOOK_DIR/$hook"
   if [ -f "$src" ]; then
     cp "$src" "$dest"

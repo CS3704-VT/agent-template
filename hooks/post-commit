@@ -1,0 +1,55 @@
+#!/bin/sh
+# Git post-commit hook: when the user commits outside Opencode, offer
+# to launch opencode with a learning-opportunity prompt. Only fires if
+# opencode is on PATH and the daily offer cap (5) has not been reached.
+#
+# The rate-limit state file is shared with post-tool-use.sh so commits
+# inside and outside Opencode count toward the same daily budget.
+
+# --- Only fire when run from a real terminal (not inside Opencode) ---
+[ -t 0 ] || exit 0
+
+# --- Rate limiting (per calendar day) ---
+STATE_FILE="${TMPDIR:-/tmp}/lo_auto_git-$(date +%Y-%m-%d).state"
+offers=0
+if [ -f "$STATE_FILE" ]; then
+  offers=$(cat "$STATE_FILE" 2>/dev/null || echo 0)
+fi
+
+if [ "$offers" -ge 5 ]; then
+  exit 0
+fi
+
+# --- Bail if opencode is not available ---
+if ! command -v opencode >/dev/null 2>&1; then
+  exit 0
+fi
+
+# --- Gather commit context ---
+HASH=$(git log -1 --format=%h)
+MSG=$(git log -1 --format=%s)
+FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | head -20)
+
+# --- Ask before launching ---
+printf '\n\033[1;36m📚 Learning opportunity available\033[0m — launch opencode? [Y/n] '
+read -r answer
+if [ "$answer" = "n" ] || [ "$answer" = "N" ]; then
+  exit 0
+fi
+
+# --- Record the offer (rate limiting) ---
+echo $(( offers + 1 )) > "$STATE_FILE"
+
+# --- Launch opencode ---
+PROMPT="[learning-opportunities-auto] The user just committed code outside of opencode.
+
+Commit: $HASH
+Message: $MSG
+Files changed:
+$FILES
+
+Per the learning-opportunities skill, consider whether this is a good moment to offer a learning exercise. If the committed work involved new files, schema changes, architectural decisions, refactors, or unfamiliar patterns, ask the user (one short sentence) if they'd like a 10-15 minute exercise. Do not start the exercise until they confirm. If they decline, note it — no more offers this session."
+
+opencode run "$PROMPT"
+
+exit 0
