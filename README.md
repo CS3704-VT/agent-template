@@ -6,6 +6,8 @@ This repository configures [Opencode](https://opencode.ai/) with course-specific
 
 To use this template, you will need [git](https://git-scm.com/install/), [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm?ref=meilisearch-blog), and an ARC_API_KEY [environment variable](https://chlee.co/how-to-setup-environment-variables-for-windows-mac-and-linux/) set to your [API key from Virginia Tech's Advanced Research Computing](https://www.docs.arc.vt.edu/ai/011_llm_api_arc_vt_edu.html#llm-api-arc-vt-edu).
 
+> **Disclaimer:** To use this template with ARC, you must be within the Virginia Tech network (on campus or VPN). Do _not_ share your API key!
+
 
 ### Setup:
 

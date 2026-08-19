@@ -55,13 +55,17 @@ agent-template/
    export ARC_API_KEY=sk-... # MacOS and Linux
    setx ARC_API_KEY=sk-...   # Windows
    ```
-  - To obtain an API Key for the Virignia Tech Advanced Research Computing, go to [https://llm.arc.vt.edu](https://llm.arc.vt.edu) then select go to your user profile and select _Settings_ -> _Account_ -> _API keys_. More details on obtaining your API key are available [here](https://www.docs.arc.vt.edu/ai/011_llm_api_arc_vt_edu.html#llm-api-arc-vt-edu).
+  - To obtain an API Key for the Virignia Tech Advanced Research Computing, go to [https://llm.arc.vt.edu](https://llm.arc.vt.edu) then select go to your user profile and select _Settings_ -> _Account_ -> _API keys_. More details on obtaining your API key are available [here](https://www.docs.arc.vt.edu/ai/011_llm_api_arc_vt_edu.html#llm-api-arc-vt-edu). **Do _not_ share your API key!**
+  - To use this agentic framework with ARC, you must be within the Virginia Tech network (either using the wi-fi on campus or VPN).
   - Additional details on setting an environment variable for your system are available [here](https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/How-to-set-an-environment-variable.html). Please follow the instructions for setting a persistent/permanent variable to avoid resetting your ARC_API_KEY variable every time.
+
 
 2. **Check you have the appropriate dependencies**:
    ```sh
    baker check CS3704-VT/profile:agent-template.yml
    ```
+   - The pre-bake checks should pass. The post-bake checks will not pass until after running `baker bake`.
+   
 3. **Clone the repository, configure your environment, and run the bootstrap script:**
    ```sh
    git clone https://github.com/CS3704-VT/agent-template
