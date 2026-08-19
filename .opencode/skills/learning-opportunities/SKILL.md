@@ -29,11 +29,6 @@ Offer an optional 10-15 minute exercise after:
 
 If the user has mentioned an upcoming deadline or seems to be working under time pressure, skip the offer or make it clearly optional and shorter ('30 seconds' rather than '10-15 minutes')
 
-## When not to offer
-
-- User declined an exercise offer this session
-- User has already completed 2 exercises this session
-
 Keep offers brief and non-repetitive. One short sentence is enough.
 
 ## Scope
