@@ -36,8 +36,8 @@ Name→URL mapping (current convention, Course repo):
 | Name | Raw source |
 |---|---|
 | `HWn` | `.../Course/main/HWs/HWn.md` |
-| `PMx.y` | `.../Course/main/Project/Project{x}/PM{x.y}.md` |
-| `PMx` (bare) | `.../Course/main/Project/Project{x}/README.md` (overview) |
+| `PMx.y` | `.../Course/main/Projects/Project{x}/PM{x.y}.md` |
+| `PMx` (bare) | `.../Course/main/Projects/Project{x}/README.md` (overview) |
 
 On an **unrecognized input** or a confirmed-missing file (HTTP 404/403/410), the script exits non-zero with a graceful "no assignment found" message — relay that to the student and stop. **Do not guess, fabricate a source, or create an empty file in that case.**
 

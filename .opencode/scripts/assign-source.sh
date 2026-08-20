@@ -69,17 +69,17 @@ if [[ "$lower" =~ ^hw([0-9]+)$ ]]; then
   exit 0
 fi
 
-# 3) Project milestone: PM<x.y> -> Project/Project<x>/PM<x.y>.md
-#    Bare PM<x>        -> Project/Project<x>/README.md (overview, not an assignment)
+# 3) Project milestone: PM<x.y> -> Projects/Project<x>/PM<x.y>.md
+#    Bare PM<x>        -> Projects/Project<x>/README.md (overview, not an assignment)
 if [[ "$lower" =~ ^pm([0-9]+)([.][0-9]+)?$ ]]; then
   proj_num="${BASH_REMATCH[1]}"
   if [[ -n "${BASH_REMATCH[2]:-}" ]]; then
     # PMx.y — actual assignment
-    url="$BASE/Project/Project${proj_num}/${arg}.md"
+    url="$BASE/Projects/Project${proj_num}/${arg}.md"
     kind="assignment"
   else
     # PMx — project overview README, not a submission assignment
-    url="$BASE/Project/Project${proj_num}/README.md"
+    url="$BASE/Projects/Project${proj_num}/README.md"
     kind="overview"
   fi
   verify_url "$url" || exit 1
