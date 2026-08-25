@@ -8,7 +8,7 @@ session-*.md
 session-summary.md
 
 # Student-generated logs (these are .gitignored, but will be included with assignment submissions)
-concept-explain.json
+concept-explain-log.jsonl
 teacher-log.jsonl
 learning-log.jsonl
 

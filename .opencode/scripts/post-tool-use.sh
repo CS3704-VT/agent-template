@@ -9,6 +9,13 @@ set -uo pipefail
 # exercise — this hook just provides the nudge at the right moment.
 #
 # No external dependencies beyond bash and standard Unix tools.
+#
+# NOTE: This script uses the Claude-Code/Codex `PostToolUse` protocol, which
+# opencode does not implement (see env diagnosis, Aug 2026). The ACTIVE
+# in-opencode mechanism is now the opencode plugin
+# .opencode/plugins/learning-opportunity.ts (tool.execute.after), which sends
+# the same nudge. This script is kept as a reference/legacy implementation and
+# shares its /tmp state-file scheme with that plugin.
 
 INPUT=$(cat)
 

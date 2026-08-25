@@ -10,8 +10,9 @@ This repository is your **agentic development environment** for CS3704 (Intermed
 | `PHASE.md` | Which agents are live this phase, and the roadmap of what arrives next. **Check this first.** |
 | `.opencode/agents/*.md` | The course agents. The baseline available agents are **Plan** (for planning), **Build** (for coding), **`@dcbrown`** (for course administration), and **`@assignment`** (for assignment requirements and packaging). The available agents will grow with each phase — see `PHASE.md`. |
 | `.opencode/skills/*` | On-demand capabilities: `quiz`, `concept-explain`, `learning-goal`, `learning-opportunities`, `orient`, `submit`. |
-| `.opencode/scripts/` | Helper scripts: `post-tool-use.sh` (learning nudges) and `submit.sh` (submission packaging). |
-| `hooks/`, `setup.sh` | Git-hook infrastructure. `setup.sh` installs the hooks into `.git/hooks/`. |
+| `.opencode/plugins/` | Auto-loaded opencode plugins. `learning-opportunity.ts` nudges the agent to offer a learning exercise after `git commit`s made **inside** opencode. |
+| `.opencode/scripts/` | Helper scripts: `fetch-lecture.sh` (lecture PDF text extraction), `submit-*.sh` (submission packaging), and the legacy `post-tool-use.sh` (superseded by the plugin for in-opencode commits). |
+| `hooks/`, `setup.sh` | Git-hook infrastructure. `setup.sh` installs the hooks into `.git/hooks/`. `post-commit` offers learning opportunities for commits made **outside** opencode; `pre-commit` is a stub. |
 | `docs/templates/` | Starter templates for course artifacts. |
 | `opencode.json` | Provider and model configuration. |
 
@@ -33,13 +34,15 @@ agent-template/
 │   └── templates/
 │       └── assignment.md   # seed for @assignment analyze (copied to <name>.md at repo root)
 ├── hooks/               # git-hook sources
-│   ├── pre-commit       # on commit, calls .opencode/scripts/post-tool-use.sh
+│   ├── pre-commit       # stub (learning logic moved to post-commit)
+│   ├── post-commit      # commits made OUTSIDE opencode: offers to launch opencode for a learning exercise
 │   └── setup-git-hooks.sh  # copies hooks into .git/hooks/
 └── .opencode/           # opencode config home
     ├── agents/*.md      # one file per agent (build, plan, dcbrown, …)
     ├── skills/<name>/SKILL.md   # on-demand capabilities (quiz, concept-explain, …)
-    ├── scripts/         # post-tool-use.sh (learning nudges), submit.sh (packaging)
-    └── topics/          # reserved, currently empty
+    ├── plugins/         # learning-opportunity.ts flags git commits made INSIDE opencode
+    ├── scripts/         # fetch-lecture.sh, submit-*.sh, legacy post-tool-use.sh
+    └── topics/          # allowed-concepts.txt, concept-lecture-map.json
 ```
 
 ### Template Editing
@@ -109,7 +112,7 @@ Phase-gated agents (requirements, architect, tester, etc.) arrive with their pha
 4. **Pick the right agent with `<tab>`** — `plan` for brainstorming (read-only), `build` for code/tests/edits, **`@dcbrown`** for course questions and quizzes, and **`@assignment`** for assignment details and submission. Check [PHASE.md](../PHASE.md) for phase-gated agents; see [Using the agents](#using-the-agents).
 5. **Plan → Build handoff** — ideate with `plan`; when the plan is solid, have `build` implement it (Plan delegates writes to Build).
 6. **Learn as you go** — after significant work, accept a `learning-opportunities` exercise; run `/concept-explain <term>` to get details on a concept, or <code><strong>@dcbrown</strong> quiz me on <topic></code> for a concept check; see [Learning features](#learning-features).
-7. **Commit** — `git commit` triggers the `pre-commit` hook, which may surface a learning nudge (see [Template architecture](#template-architecture-where-things-live)).
+7. **Commit** — `git commit` may surface a learning nudge: **inside** opencode via the `learning-opportunity` plugin, **outside** opencode via the `post-commit` hook (see [Template architecture](#template-architecture-where-things-live)).
 8. **Submit** — <code><strong>@assignment</strong> submit</code> packages the submission; **You must complete the final steps (i.e., upload to Canvas) to complete submissions!!!**; see [Submitting work](#submitting-work).
 
 ### Common tasks cookbook
