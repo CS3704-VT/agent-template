@@ -24,8 +24,9 @@ semester-goal.md
 .opencode/bun.lock
 .env
 
-# Local draft agents/skills (course-authoring workspace, not student-facing)
+# Local workspace and temp files
 .tmp/
+tmp/
 
 # Baker
 .baker*
