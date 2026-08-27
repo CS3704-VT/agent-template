@@ -1,23 +1,7 @@
 {
   "_note": "Curated concept -> lecture PDF mapping for the concept-explain skill. Filenames are CANDIDATES hosted at https://github.com/CS3704-VT/Course/tree/main/resources/lectures/ (PDFs; may contain spaces/casing that do not match concept names). Keep this list in sync with the actual course lectures. The skill verifies each candidate at runtime (fetch-lecture.sh dump) before using it, then falls back to a runtime filename/text match if a candidate is missing. A concept may map to more than one lecture (e.g. 'Requirements' spans elicitation + specification decks).",
-  "Agile": ["Software Process II.pdf"],
-  "Waterfall": ["Software Process I.pdf"],
-  "SDLC": ["Introduction and SDLC.pdf", "Software Process I.pdf"],
-  "Software Process": ["Software Process I.pdf", "Software Process II.pdf"],
-  "Project Management": ["Project Management.pdf"],
-  "Requirements": ["Requirements Elicitation.pdf", "Requirements Analysis and Specification.pdf"],
-  "Requirements Elicitation": ["Requirements Elicitation.pdf"],
-  "Requirements Analysis": ["Requirements Analysis and Specification.pdf"],
-  "Use Cases": ["Requirements Analysis and Specification.pdf"],
-  "Design": ["High-Level Design I.pdf", "High-Level Design II.pdf", "Low-Level Design.pdf"],
-  "Architecture": ["High-Level Design I.pdf", "High-Level Design II.pdf"],
-  "UI Design": ["UI Design.pdf"],
-  "Implementation": ["Implementation.pdf", "Maintenance.pdf"],
-  "Maintenance": ["Maintenance.pdf"],
-  "Testing": ["Testing.pdf"],
-  "CI-CD": ["CI-CD and Deployment.pdf", "Deployment.pdf"],
-  "Deployment": ["CI-CD and Deployment.pdf", "Deployment.pdf"],
-  "Advanced": ["Evidence-Based Software Engineering.pdf"],
-  "Human Aspects": ["Human Aspects of Software Engineering.pdf"],
-  "Evidence-Based Software Engineering": ["Evidence-Based Software Engineering.pdf"]
+  "Agile": ["Software_Process.pdf"],
+  "Waterfall": ["Software_Process.pdf"],
+  "SDLC": ["Introduction.pdf", "Software_Process.pdf"],
+  "Software Process": ["Software_Process.pdf"]
 }
