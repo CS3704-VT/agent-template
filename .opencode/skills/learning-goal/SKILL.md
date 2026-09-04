@@ -4,7 +4,7 @@ description: Guide the learner through a structured goal-setting exercise ground
 license: CC-BY-4.0
 ---
 
-<!-- Based on the learning-goal skill principles by Dr. Cat Hicks (https://github.com/DrCatHicks/learning-goal), licensed under CC-BY-4.0. Adapted for the CS3704 (Intermediate Software Design and Engineering) course at Virginia Tech [Fall 2026] by Dr. Chris Brown. -->
+> Based on the learning-goal skill principles by Dr. Cat Hicks (https://github.com/DrCatHicks/learning-goal), licensed under CC-BY-4.0. Adapted for the CS3704 (Intermediate Software Design and Engineering) course at Virginia Tech [Fall 2026] by Dr. Chris Brown.
 
 # Goal Setting with Mental Contrasting
 

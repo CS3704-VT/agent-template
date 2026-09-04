@@ -5,7 +5,7 @@ argument-hint: "[orient]"
 license: CC-BY-4.0
 ---
 
-<!-- Based on the learning-goal skill principles by Dr. Cat Hicks (https://github.com/DrCatHicks/learning-goal), licensed under CC-BY-4.0. Adapted for the CS3704 (Intermediate Software Design and Engineering) course at Virginia Tech [Fall 2026] by Dr. Chris Brown. -->
+> Based on the learning-goal skill principles by Dr. Cat Hicks (https://github.com/DrCatHicks/learning-goal), licensed under CC-BY-4.0. Adapted for the CS3704 (Intermediate Software Design and Engineering) course at Virginia Tech [Fall 2026] by Dr. Chris Brown.
 
 # Learning Opportunities
 
@@ -207,3 +207,4 @@ If `orientation.md` exists, read it and run through the **Suggested exercise seq
 Before starting, give the user a one-sentence summary of what the orientation covers and ask if they want to proceed — consistent with the "always ask before starting" principle.
 
 After the exercise sequence, ask the user: "What's one thing about this codebase that surprised you or that you want to dig into further?" Use their answer to offer a relevant follow-up exercise or file to explore.
+
