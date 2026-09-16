@@ -89,11 +89,11 @@ Delegate by role:
 | Concept explanations (Agile, Waterfall, SDLC phases) | any agent — `concept-explain` skill | baseline |
 | Project planning, brainstorming, initial requirements and design | `plan` | baseline |
 | Code generation, test generation, debugging | `build` | baseline |
-<!-- | Sprint planning, estimation, Scrum, risk, traceability | `@process` | phase 2 |
-| Requirements, use cases, user stories, acceptance criteria, sequence diagrams | `@requirements` | phase 2 |
-| Architecture, UML, design patterns | `@architect` | phase 2 |
-| UI generation, usability evaluation, UX testing | `@designer` | phase 2 |
-| Test planning, test case generation, CI/CD | `@tester` | phase 3 |
+| Requirements gathering, business value, prioritization, software process | `@product-manager` | phase 2 |
+| Requirements, use cases, user stories, acceptance criteria, sequence diagrams | `@requirements-analyst` | phase 2 |
+| Architecture, class diagrams, ADRs, UML, design patterns | `@system-architect` | phase 2 |
+| UI generation, usability evaluation, UX testing | `@ux-ui-designer` | phase 2 |
+<!--| Test planning, test case generation, CI/CD | `@tester` | phase 3 |
 | Code review, refactoring, debugging | `@maintainer` | phase 3 | -->
 
 ## Agent contract
