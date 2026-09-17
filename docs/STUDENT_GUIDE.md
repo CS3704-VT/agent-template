@@ -9,11 +9,11 @@ This repository is your **agentic development environment** for CS3704 (Intermed
 | `AGENTS.md` | Shared instructions every agent follows (policy, logging, budgets). Worth reading once. |
 | `PHASE.md` | Which agents are live this phase, and the roadmap of what arrives next. **Check this first.** |
 | `.opencode/agents/*.md` | The course agents. The baseline available agents are **Plan** (for planning), **Build** (for coding), **`@dcbrown`** (for course administration), and **`@assignment`** (for assignment requirements and packaging). The available agents will grow with each phase — see `PHASE.md`. |
-| `.opencode/skills/*` | On-demand capabilities: `quiz`, `concept-explain`, `learning-goal`, `learning-opportunities`, `orient`, `submit`. |
+| `.opencode/skills/*` | On-demand capabilities: `quiz`, `concept-explain`, `analysis`, `specification`, `heuristics-nielsen`, `implementation-sketch`, `learning-goal`, `learning-opportunities`, `orient`, `submit`. |
 | `.opencode/plugins/` | Auto-loaded opencode plugins. `learning-opportunity.ts` nudges the agent to offer a learning exercise after `git commit`s made **inside** opencode. |
 | `.opencode/scripts/` | Helper scripts: `fetch-lecture.sh` (lecture PDF text extraction), `submit-*.sh` (submission packaging), and the legacy `post-tool-use.sh` (superseded by the plugin for in-opencode commits). |
 | `hooks/`, `setup.sh` | Git-hook infrastructure. `setup.sh` installs the hooks into `.git/hooks/`. `post-commit` offers learning opportunities for commits made **outside** opencode; `pre-commit` is a stub. |
-| `docs/templates/` | Starter templates for course artifacts. |
+| `docs/templates/` | Starter templates for course artifacts: `assignment.md`, `use-case.md`, `user-story.md`, `use-case-diagram.md`, `sequence-diagram.md`, `class-diagram.md`, `data-model.md`, `adr.md`. |
 | `opencode.json` | Provider and model configuration. |
 
 ## Template architecture (where things live)
@@ -32,7 +32,14 @@ agent-template/
 │   ├── README.md
 │   ├── STUDENT_GUIDE.md
 │   └── templates/
-│       └── assignment.md   # seed for @assignment analyze (copied to <name>.md at repo root)
+│       ├── assignment.md       # seed for @assignment analyze (copied to <name>.md at repo root)
+│       ├── use-case.md         # text use cases (@requirements-analyst)
+│       ├── user-story.md       # user stories + Given/When/Then criteria (@requirements-analyst)
+│       ├── use-case-diagram.md # UML use case diagrams, ASCII (@requirements-analyst)
+│       ├── sequence-diagram.md # UML sequence diagrams, ASCII (@requirements-analyst)
+│       ├── class-diagram.md    # UML class diagrams, ASCII (@system-architect)
+│       ├── data-model.md       # ER data models, ASCII (@system-architect)
+│       └── adr.md              # Architectural Decision Records (@system-architect)
 ├── hooks/               # git-hook sources
 │   ├── pre-commit       # stub (learning logic moved to post-commit)
 │   ├── post-commit      # commits made OUTSIDE opencode: offers to launch opencode for a learning exercise
