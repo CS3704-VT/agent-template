@@ -1,6 +1,6 @@
 <!--
 Template: UML use case diagram, ASCII notation.
-Producer: @requirements-analyst, via the `analysis` skill.
+Producer: the `requirements-analyst` agent, via the `analysis` skill.
 Consumer:  read this file and follow the notation; replace every [placeholder].
 Output:    returned as text; build/the parent agent writes it (suggested:
            docs/requirements/<name>-use-case-diagram.md).

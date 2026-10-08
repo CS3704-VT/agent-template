@@ -1,6 +1,6 @@
 <!--
 Template: user story with Given/When/Then acceptance criteria.
-Producer: @requirements-analyst (via the `analysis` / `specification` skills).
+Producer: the `requirements-analyst` agent (via the `analysis` / `specification` skills).
 Consumer:  read and follow; replace every [placeholder].
 Output:    returned as text; build/the parent writes it (suggested:
            docs/requirements/<name>-user-stories.md).

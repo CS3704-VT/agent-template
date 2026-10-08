@@ -1,6 +1,6 @@
 <!--
 Template: data model / entity-relationship diagram (ASCII).
-Producer: @system-architect.
+Producer: the `system-architect` agent.
 Consumer:  read and follow; replace every [placeholder].
 Output:    returned as text; build/the parent writes it (suggested:
            docs/design/<name>-data-model.md).

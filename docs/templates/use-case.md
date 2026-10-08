@@ -1,6 +1,6 @@
 <!--
 Template: text use case for CS3704 requirements analysis.
-Producer: @requirements-analyst, via the `analysis` skill.
+Producer: the `requirements-analyst` agent, via the `analysis` skill.
 Consumer:  read this file and follow its structure; replace every [placeholder].
 Output:    the producing agent RETURNS the filled content. Phase-2 agents are
            read-only — build/the parent agent writes the artifact (suggested

@@ -15,7 +15,7 @@ This repository and the coursework artifacts it contains were developed for the 
 
 ## Tools and Infrastructure
 
-**Opencode.** This repository is configured for Opencode (https://opencode.ai/), an open-source agentic coding environment through which all agent and skill interactions were conducted.
+**Claude Code.** This repository is configured for Claude Code (https://code.claude.com/), Anthropic's agentic coding environment, connected to ARC models through `.claude/scripts/arc-claude.sh`. It was originally built for Opencode (https://opencode.ai/), an open-source agentic coding environment through which the original agent and skill interactions were conducted.
 
 **Advanced Research Computing (ARC).** Model inference is provided by the Virginia Tech [Advanced Research Computing](https://arc.vt.edu/).
 

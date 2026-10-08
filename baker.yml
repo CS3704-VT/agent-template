@@ -16,8 +16,8 @@ local: {}
 
 tools:
   - opunit
-  - opencode:
-      install: npm
+  - claude-code:
+      install: npm   # npm install -g @anthropic-ai/claude-code
 
 
 config:
@@ -38,11 +38,20 @@ commands:
     echo "🍞 Your CS3704 environment is baked and ready." &&
     echo "" &&
     echo "🧑‍🍳 Next, in order:" &&
-    echo "   1. opencode                      start the agent workspace" &&
-    echo "   2. @assignment analyze HW1       pull in the assignment details" &&
+    echo "   1. baker run assignment          start the assignment agent, then: analyze HW1" &&
+    echo "   2. baker run claude              start the default session (Shift+Tab = Plan Mode)" &&
     echo "   3. /learning-goal                set your goals for it (10-15 min)" &&
     echo "" &&
-    echo "🥖 Switch agents with <tab>; call subagents with @name." &&
+    echo "🥖 Other agents: baker run dcbrown | requirements | product | ux | architect" &&
+    echo "   Needs ARC_API_KEY set and the VT network/VPN. Bare 'claude' does not use ARC." &&
     echo "⏲️  Something looks off? Contact dcbrown" &&
     echo ""
 
+  # Launchers — every session goes through ARC via .claude/scripts/arc-claude.sh.
+  claude: .claude/scripts/arc-claude.sh
+  dcbrown: .claude/scripts/arc-claude.sh --agent dcbrown
+  assignment: .claude/scripts/arc-claude.sh --agent assignment
+  requirements: .claude/scripts/arc-claude.sh --agent requirements-analyst
+  product: .claude/scripts/arc-claude.sh --agent product-manager
+  ux: .claude/scripts/arc-claude.sh --agent ux-ui-designer
+  architect: .claude/scripts/arc-claude.sh --agent system-architect

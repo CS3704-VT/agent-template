@@ -1,6 +1,6 @@
 <!--
 Template: Architectural Decision Record (ADR).
-Producer: @system-architect.
+Producer: the `system-architect` agent.
 Consumer:  read this file and follow its structure; replace every [placeholder].
 Output:    returned as text; build/the parent agent writes it (suggested:
            docs/adr/NNNN-<slug>.md).

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(.claude/scripts/log-jsonl.sh:*)",
+      "Bash(.claude/scripts/fetch-lecture.sh:*)",
+      "Bash(.claude/scripts/assign-source.sh:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Edit(~/.config/cs3704-goals/**)",
+      "Write(~/.config/cs3704-goals/**)"
+    ],
+    "additionalDirectories": ["~/.config/cs3704-goals"]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/scripts/session-start.sh" }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          { "type": "command", "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/scripts/post-tool-use.sh" }
+        ]
+      }
+    ]
+  }
+}

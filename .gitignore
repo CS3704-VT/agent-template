@@ -17,11 +17,9 @@ learning-goal.md
 team-goal.md
 semester-goal.md
 
-# opencode runtime (auto-generated dependency files)
-.opencode/node_modules/
-.opencode/package.json
-.opencode/package-lock.json
-.opencode/bun.lock
+# Claude Code per-user settings and generated orientation
+.claude/settings.local.json
+.claude/skills/learning-opportunities/resources/orientation.md
 .env
 
 # Local workspace and temp files

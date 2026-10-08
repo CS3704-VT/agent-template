@@ -1,5 +1,5 @@
 ---
-# Seed for @assignment analyze. `analyze <name>` copies this to <name>.md at the
+# Seed for the assignment agent's `analyze`. `analyze <name>` copies this to <name>.md at the
 # repo root (e.g. PM1.1.md, HW1.md) and fills the fields. Review and override as needed.
 name:            # e.g. PM1.1, HW1  (set by analyze)
 type:
@@ -19,7 +19,7 @@ submission:
 ---
 
 # Requirements
-<!-- @assignment analyze fetches/parses the assignment source into a checklist here. -->
+<!-- assignment agent `analyze` fetches/parses the assignment source into a checklist here. -->
 
 ## Verification status
-<!-- @assignment analyze walks the repo and records [x]/[ ] + evidence per deliverable. -->
+<!-- assignment agent `analyze` walks the repo and records [x]/[ ] + evidence per deliverable. -->

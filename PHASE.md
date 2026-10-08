@@ -4,7 +4,9 @@
 
 ## Available agents this phase
 
-build · plan · dcbrown · assignment · requirements-analyst · product-manager · ux-ui-designer · system-architect
+dcbrown · assignment · requirements-analyst · product-manager · ux-ui-designer · system-architect
+
+Start one with `baker run <short name>` (`dcbrown`, `assignment`, `requirements`, `product`, `ux`, `architect`) or `.claude/scripts/arc-claude.sh --agent <name>`. Planning and building happen in the default session (`baker run claude`); press Shift+Tab there for Plan Mode.
 
 ## Available skills this phase
 
@@ -14,7 +16,7 @@ analysis . heuristics-nielsen . implementation-sketch . raci-matrix . specificat
 
 | # | Branch | Adds |
 |---|--------|------|
-| 1 | `main` (baseline) | build, plan, dcbrown, assignment |
+| 1 | `main` (baseline) | default session + Plan Mode, dcbrown, assignment |
 | 2 | `phase/02-requirements-design` | requirements-analyst, product-manager, ux-ui-designer, system-architect |
 | 3 | `phase/03-testing-maintenance` | `tester`, `maintainer`, and `review` agents |
 
