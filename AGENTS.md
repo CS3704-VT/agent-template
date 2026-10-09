@@ -36,7 +36,7 @@ Write that value verbatim into the `session` field of every log entry.
 
 Occasionally — roughly every 15–20 steps (tool calls across the whole session), or at a genuine teachable moment — invoke the `dcbrown` subagent via `Task()` for a short concept check on course material. Pass the context, e.g. "quiz student on SRP — their class has multiple responsibilities", so the quiz can be grounded in what they are actually doing.
 
-After significant work (new files, refactors, architectural decisions), load the `learning‑opportunities` skill and offer a 10–15 minute exercise on the code the student just wrote — practice on their own work, not a graded quiz. The `learning-opportunities` skill should also be triggered by the hook in `.opencode/scripts/post-tool-use.sh`. Always ask before starting.
+After significant work (new files, refactors, architectural decisions), load the `learning‑opportunities` skill and offer a 10–15 minute exercise on the code the student just wrote — practice on their own work, not a graded quiz. The `learning-opportunities` skill should also be triggered after commits: by the PostToolUse hook in `.claude/scripts/post-tool-use.sh` (Claude Code, registered in `.claude/settings.json`), the plugin `.claude/plugins/learning-opportunity.ts` (opencode), and the git hook `hooks/post-commit` (commits made outside an agent session). Always ask before starting.
 
 If the student mentions wanting to learn something or set a goal, load the `learning‑goal` skill.
 

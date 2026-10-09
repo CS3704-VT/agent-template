@@ -4,38 +4,46 @@ set -uo pipefail
 # learning-opportunities-auto: PostToolUse hook (matches Bash tool)
 #
 # Fires after every Bash tool use. Checks whether the command was a
-# `git commit` and, if so, suggests that Opencode offer a learning exercise.
+# `git commit` and, if so, suggests that the agent offer a learning exercise.
 # The skill itself decides whether the commit's content is worth an
 # exercise — this hook just provides the nudge at the right moment.
 #
-# No external dependencies beyond bash and standard Unix tools.
+# Registered for Claude Code in .claude/settings.json (PostToolUse, matcher
+# "Bash"). Claude Code sends JSON on stdin:
+#   {"session_id": "...", "tool_name": "Bash",
+#    "tool_input": {"command": "..."}, "tool_response": {...}, ...}
+# Codex sends the same protocol but may name the field "cmd".
 #
-# NOTE: This script uses the Claude-Code/Codex `PostToolUse` protocol, which
-# opencode does not implement (see env diagnosis, Aug 2026). The ACTIVE
-# in-opencode mechanism is now the opencode plugin
-# .opencode/plugins/learning-opportunity.ts (tool.execute.after), which sends
-# the same nudge. This script is kept as a reference/legacy implementation and
-# shares its /tmp state-file scheme with that plugin.
+# Uses jq when available; falls back to grep/sed otherwise.
+#
+# NOTE: opencode does not implement this protocol. The in-opencode equivalent
+# is the plugin .claude/plugins/learning-opportunity.ts (tool.execute.after),
+# which shares this script's /tmp state-file scheme.
 
 INPUT=$(cat)
 
 # ---------------------------------------------------------------------------
-# Check if this was a git commit. Opencode sends shell text in a "command"
-# field; Codex can send it in a "cmd" field. False positives (e.g., output
-# that mentions "git commit") are harmless — we just offer a learning exercise
-# unnecessarily.
+# Extract the shell command the tool ran. Only tool_input is inspected — the
+# tool_response holds command output, and matching against it would fire on
+# e.g. `git status` printing "nothing to commit".
 # ---------------------------------------------------------------------------
 
-if ! echo "$INPUT" | grep -Eq '"(command|cmd)".*git.*commit'; then
-  exit 0
+if command -v jq >/dev/null 2>&1; then
+  COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // .tool_input.cmd // .command // .cmd // empty' 2>/dev/null)
+  SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // empty' 2>/dev/null)
+else
+  # Fallback: whitespace-tolerant field extraction. Escaped quotes inside the
+  # command truncate the match, which is fine — `git commit` comes first.
+  COMMAND=$(echo "$INPUT" | grep -oE '"(command|cmd)"[[:space:]]*:[[:space:]]*"[^"]*' | head -1 | sed -E 's/^"(command|cmd)"[[:space:]]*:[[:space:]]*"//')
+  SESSION_ID=$(echo "$INPUT" | grep -oE '"session_id"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed -E 's/^"session_id"[[:space:]]*:[[:space:]]*"//;s/"$//')
 fi
 
-# ---------------------------------------------------------------------------
-# Extract session_id for rate limiting. It's a top-level UUID — no escaped
-# quotes or nesting to worry about, so basic grep/sed is safe.
-# ---------------------------------------------------------------------------
-
-SESSION_ID=$(echo "$INPUT" | grep -o '"session_id":"[^"]*"' | head -1 | sed 's/"session_id":"//;s/"$//')
+# `git` must start a command word and `commit` must be its subcommand (global
+# options like `-C <dir>` allowed in between), so paths such as
+# .git/hooks/post-commit don't match.
+if ! echo "$COMMAND" | grep -Eq '(^|[;&|(`[:space:]])git([[:space:]]+(-C[[:space:]]+[^[:space:]]+|-[^[:space:]]+))*[[:space:]]+commit([[:space:];&|)]|$)'; then
+  exit 0
+fi
 
 if [[ -z "$SESSION_ID" ]]; then
   exit 0
