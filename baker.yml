@@ -16,8 +16,7 @@ local: {}
 
 tools:
   - opunit
-  - opencode:
-      install: npm
+  - npm: "@openai/codex"
 
 
 config:
@@ -28,21 +27,35 @@ config:
       - src: ./hooks/pre-commit
         dest: .git/hooks/pre-commit
         mode: "0755"
+      - src: ./hooks/post-commit
+        dest: .git/hooks/post-commit
+        mode: "0755"
 
 commands:
   # Orientation, not work. Everything this repo needs is done by `baker bake`;
   # analyze and the goal exercise are interactive and belong to the student, so
   # setup points at them rather than driving them.
+  # The ARC provider must live in the user's ~/.codex/config.toml (Codex
+  # ignores providers in project config). Copy it only when no user config
+  # exists — never overwrite or append to one the student already has.
   setup: >-
+    mkdir -p ~/.codex &&
+    if [ ! -f ~/.codex/config.toml ]; then
+      cp .codex/config.user.example.toml ~/.codex/config.toml &&
+      echo "🔧 Wrote ARC model settings to ~/.codex/config.toml";
+    elif ! grep -q 'model_providers.arc' ~/.codex/config.toml; then
+      echo "⚠️  Merge .codex/config.user.example.toml into ~/.codex/config.toml to use ARC models";
+    fi &&
     echo "" &&
     echo "🍞 Your CS3704 environment is baked and ready." &&
     echo "" &&
     echo "🧑‍🍳 Next, in order:" &&
-    echo "   1. opencode                      start the agent workspace" &&
-    echo "   2. @assignment analyze HW1       pull in the assignment details" &&
-    echo "   3. /learning-goal                set your goals for it (10-15 min)" &&
+    echo "   1. codex                                   start the agent workspace" &&
+    echo "      (trust this project when asked, then approve the hooks with /hooks)" &&
+    echo "   2. have the assignment agent analyze HW1   pull in the assignment details" &&
+    echo "   3. \$learning-goal                          set your goals for it (10-15 min)" &&
     echo "" &&
-    echo "🥖 Switch agents with <tab>; call subagents with @name." &&
+    echo "🥖 Ask for subagents by name; type \$ or /skills for skills." &&
     echo "⏲️  Something looks off? Contact dcbrown" &&
     echo ""
 

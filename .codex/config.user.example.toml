@@ -1,0 +1,22 @@
+# CS3704 — Codex user config for Virginia Tech ARC.
+#
+# Codex ignores model-provider settings in a project's .codex/config.toml, so
+# this belongs in YOUR user config: ~/.codex/config.toml. `baker run setup`
+# copies it there if you have no user config yet; otherwise merge it in by hand
+# (top-level keys must go above any [table] in that file).
+#
+# Requires the ARC_API_KEY environment variable and the VT network (on campus
+# or VPN). Do not share your API key.
+
+model_provider = "arc"
+model = "DeepSeek-V4.1-Flash"
+
+[model_providers.arc]
+name = "ARC"
+base_url = "https://llm-api.arc.vt.edu/api/v1"
+env_key = "ARC_API_KEY"
+# Codex's documented wire API is "responses". If ARC rejects it, try "chat".
+wire_api = "responses"
+
+# Other ARC models: gpt-oss-120b, GLM-5.3, GLM-5.3-thinking-high
+# Switch with `codex --model <name>` or /model inside Codex.

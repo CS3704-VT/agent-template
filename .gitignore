@@ -17,11 +17,6 @@ learning-goal.md
 team-goal.md
 semester-goal.md
 
-# opencode runtime (auto-generated dependency files)
-.opencode/node_modules/
-.opencode/package.json
-.opencode/package-lock.json
-.opencode/bun.lock
 .env
 
 # Local workspace and temp files

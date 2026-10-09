@@ -1,6 +1,6 @@
 # CS3704 — Shared Agent Instructions
 
-These instructions apply to every agent in this project. Agent-specific role, permissions, and responsibilities live in `.opencode/agents/*.md` (see `PHASE.md` for the agents available in the current phase); anything that applies to more than one agent belongs here so it only has to be changed in one place.
+These instructions apply to every agent in this project. Agent-specific role, permissions, and responsibilities live in `.codex/agents/*.toml` (see `PHASE.md` for the agents available in the current phase); anything that applies to more than one agent belongs here so it only has to be changed in one place.
 
 ## Core identity
 
@@ -25,8 +25,9 @@ Course learning outcomes are listed in the syllabus and README. The `quiz` skill
 
 Several rules below depend on knowing which session you are in. Establish the session ID once, at the first point you need it, and reuse that exact string for the rest of the session:
 
-1. If you can run bash, use the current opencode session ID:
-   `opencode session list --format json` → the first `ses_...` value.
+1. Use the Codex session ID injected at session start by `.codex/scripts/session-start.sh`
+   (the line `CS3704 session id: <id>` in your context). Subagents receive it from the
+   parent when spawned — always pass it along in the spawn prompt.
 2. Otherwise, use the ISO-8601 UTC timestamp of your first log write this session
    (e.g. `2026-08-01T14:22:05Z`).
 
@@ -34,9 +35,9 @@ Write that value verbatim into the `session` field of every log entry.
 
 ## Offering quizzes and exercises
 
-Occasionally — roughly every 15–20 steps (tool calls across the whole session), or at a genuine teachable moment — invoke the `dcbrown` subagent via `Task()` for a short concept check on course material. Pass the context, e.g. "quiz student on SRP — their class has multiple responsibilities", so the quiz can be grounded in what they are actually doing.
+Occasionally — roughly every 15–20 steps (tool calls across the whole session), or at a genuine teachable moment — spawn the `dcbrown` subagent for a short concept check on course material. Pass the context, e.g. "quiz student on SRP — their class has multiple responsibilities", so the quiz can be grounded in what they are actually doing.
 
-After significant work (new files, refactors, architectural decisions), load the `learning‑opportunities` skill and offer a 10–15 minute exercise on the code the student just wrote — practice on their own work, not a graded quiz. The `learning-opportunities` skill should also be triggered after commits: by the PostToolUse hook in `.claude/scripts/post-tool-use.sh` (Claude Code, registered in `.claude/settings.json`), the plugin `.claude/plugins/learning-opportunity.ts` (opencode), and the git hook `hooks/post-commit` (commits made outside an agent session). Always ask before starting.
+After significant work (new files, refactors, architectural decisions), load the `learning‑opportunities` skill and offer a 10–15 minute exercise on the code the student just wrote — practice on their own work, not a graded quiz. The `learning-opportunities` skill should also be triggered after commits: by the PostToolUse hook in `.codex/scripts/post-tool-use.sh` (commits made inside Codex, registered in `.codex/hooks.json`) and the git hook `hooks/post-commit` (commits made outside Codex). Always ask before starting.
 
 If the student mentions wanting to learn something or set a goal, load the `learning‑goal` skill.
 
@@ -44,7 +45,7 @@ Pop Quizzes are subject to the 1‑Quiz budget. Learning‑Opportunities and Con
 
 ## Interactive prompts
 
-Ask every quiz question, exercise question, and goal‑setting question with the interactive `question` tool — never as plain text. Ask one question per call. Do not print the options in chat; the tool renders them. This behaves identically no matter which agent is running. For learner‑generated answers (predictions, explanations, goals, obstacles, if‑then plans) pass `options: []` so the student types their own response. Never supply suggested answers, example responses, or hints disguised as options.
+Ask every quiz question, exercise question, and goal‑setting question one at a time. If Codex offers an interactive question tool in the current mode (e.g. `request_user_input`), use it, one question per call, and do not repeat the options in chat. Otherwise ask exactly one question per message and stop to wait for the student's reply — never batch several questions in one message. This behaves identically no matter which agent is running. For learner‑generated answers (predictions, explanations, goals, obstacles, if‑then plans) give no options at all so the student types their own response. Never supply suggested answers, example responses, or hints disguised as options.
 
 If the student dismisses a prompt, treat it as their choice to skip. Do not re‑offer.
 
@@ -80,32 +81,36 @@ Never write exercise or goal entries to `teacher‑log.jsonl`. Each skill define
 
 Subagents arrive incrementally over the semester; only invoke one that is live this
 phase (compare the "Available from" column to the current phase in `PHASE.md`).
-Delegate by role:
+Delegate by spawning the named subagent (defined in `.codex/agents/<name>.toml`). Students may
+also ask for one by name, e.g. "have the assignment agent analyze HW1". The top-level Codex
+session acts as `build` unless the student is in plan mode. Delegate by role:
 
 | For this work | Delegate to | Available from |
 |---|---|---|
-| Course questions, quizzes | `@dcbrown` | baseline |
-| Assignment analysis, verification, submission packaging | `@assignment` | baseline |
+| Course questions, quizzes | `dcbrown` | baseline |
+| Assignment analysis, verification, submission packaging | `assignment` | baseline |
 | Concept explanations (Agile, Waterfall, SDLC phases) | any agent — `concept-explain` skill | baseline |
-| Project planning, brainstorming, initial requirements and design | `plan` | baseline |
-| Code generation, test generation, debugging | `build` | baseline |
-| Requirements gathering, business value, prioritization, software process | `@product-manager` | phase 2 |
-| Requirements, use cases, user stories, acceptance criteria, sequence diagrams | `@requirements-analyst` | phase 2 |
-| Architecture, class diagrams, ADRs, UML, design patterns | `@system-architect` | phase 2 |
-| UI generation, usability evaluation, UX testing | `@ux-ui-designer` | phase 2 |
-<!--| Test planning, test case generation, CI/CD | `@tester` | phase 3 |
-| Code review, refactoring, debugging | `@maintainer` | phase 3 | -->
+| Project planning, brainstorming, initial requirements and design | `plan` (or Codex plan mode) | baseline |
+| Code generation, test generation, debugging | `build` (the default top-level role) | baseline |
+| Requirements gathering, business value, prioritization, software process | `product-manager` | phase 2 |
+| Requirements, use cases, user stories, acceptance criteria, sequence diagrams | `requirements-analyst` | phase 2 |
+| Architecture, class diagrams, ADRs, UML, design patterns | `system-architect` | phase 2 |
+| UI generation, usability evaluation, UX testing | `ux-ui-designer` | phase 2 |
+<!--| Test planning, test case generation, CI/CD | `tester` | phase 3 |
+| Code review, refactoring, debugging | `maintainer` | phase 3 | -->
 
 ## Agent contract
 
-Every agent file under `.opencode/agents/` — course-provided or student-created —
+Every agent file under `.codex/agents/` — course-provided or student-created —
 is bound by this file and must:
 
-- Declare frontmatter: `description`, `mode`, and a `permission` block stating
-  exactly what it may do (read/edit/bash/skill/task/question/etc.).
-- Open the body by pointing to this file for shared policy (budgets, logging,
-  session identity, interactive-prompt rules).
-- Stay in role: do not perform another agent's job; delegate via `Task()` instead.
+- Be a TOML file declaring `name`, `description`, `sandbox_mode` (`read-only` unless it
+  must write), and `developer_instructions`.
+- Open `developer_instructions` with a permissions line stating exactly what it may do
+  (read/edit/bash/skills/subagents/questions/etc.) — Codex enforces only the sandbox, so
+  this line is the contract — then point to this file for shared policy (budgets,
+  logging, session identity, interactive-prompt rules).
+- Stay in role: do not perform another agent's job; spawn that agent instead.
 - Adhere to the interactive-prompt and logging rules above when running a learning
   activity.
 
@@ -117,11 +122,11 @@ Three scopes, three locations:
 
 | Scope | File |
 |-------|------|
-| Semester | `~/.config/opencode/cs3704-goals/semester-goal.md` |
+| Semester | `~/.codex/cs3704-goals/semester-goal.md` |
 | Per‑assignment | `learning‑goal.md` (project root) |
 | Team project | `team‑goal.md` (project root) |
 
-Agents may write only where their frontmatter declares edit permission. The two project-root goal files may be written by any agent with edit access there; the semester goal lives outside every agent's edit scope and must be delegated to Build via `Task()`. Review these files and provide learning opportunities, concept explanations, and quizzes to help students attain these goals for the course.
+Agents may write only where their permissions line declares edit permission. The two project-root goal files may be written by any agent with edit access there; the semester goal lives outside every agent's edit scope and must be delegated to the `build` subagent (writing it also needs the student's approval, since it is outside the workspace sandbox). Review these files and provide learning opportunities, concept explanations, and quizzes to help students attain these goals for the course.
 
 
 ## Escalation
