@@ -14,5 +14,9 @@
   "User stories": ["Requirements-Analysis_Specification.pdf"],
   "Software Design": ["Software-Design.pdf"],
   "Software Architecture": ["Software-Design.pdf"],
-  "UI Design": ["UI-Design.pdf"]
+  "UI Design": ["UI-Design.pdf"],
+  "Implementation": ["Implementation-Maintenance.pdf"],
+  "Code Quality": ["Implementation-Maintenance.pdf"],
+  "Code Analysis": ["Implementation-Maintenance.pdf"],
+  "Maintenance": ["Implementation-Maintenance.pdf","[Project Workday] 10_8.pdf"]
 }
